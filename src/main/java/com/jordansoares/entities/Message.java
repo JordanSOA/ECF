@@ -30,7 +30,7 @@ public class Message {
     private User user;
 
     @OneToOne
-    private Message message;
+    private Message nextMessage;
 
     public Message() {
     }
@@ -73,11 +73,11 @@ public class Message {
         this.user = user;
     }
 
-    public Message getMessage() {
-        return message;
+    public Message getNextMessage() {
+        return nextMessage;
     }
 
-    public void setMessage(Message message) {
-        this.message = message;
+    public void setNextMessage(Message nextMessage) {
+        this.nextMessage = nextMessage;
     }
 }

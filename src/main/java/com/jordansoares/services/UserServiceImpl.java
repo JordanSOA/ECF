@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -21,7 +23,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Verify User is registred - Login
+     * @params email, password
+     * @return void
+     */
     @Override
+    @Transactional
     public void verifyUser(String email, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
@@ -32,8 +40,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void registerUser(UserDto userDto) {
-        User user = new User(userDto.getFirstname(), userDto.getLastname(),userDto.getPassword(),userDto.getEmail(), userDto.getBirthdate(), userDto.getLastKnownPresence());
+        User user = new User(userDto.getFirstname(), userDto.getLastname(), passwordEncoder.encode(userDto.getPassword()),userDto.getEmail(), userDto.getBirthdate(), userDto.getLastKnownPresence());
         userRepository.save(user);
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return userRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public UserDto convertEntityToDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setEmail(user.getEmail());
+        userDto.setPassword(user.getPassword());
+        userDto.setFirstname(user.getFirstname());
+        userDto.setLastname(user.getLastname());
+        userDto.setBirthdate(user.getBirthdate());
+        userDto.setLastKnownPresence(user.getLastKnownPresence());
+        return userDto;
+    }
+
+    @Override
+    public User convertDtoEntityTo(UserDto userDto) {
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        user.setFirstname(userDto.getFirstname());
+        user.setLastname(userDto.getLastname());
+        user.setBirthdate(userDto.getBirthdate());
+        return user;
     }
 }
