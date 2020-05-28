@@ -1,0 +1,34 @@
+h1 {
+    font-size: revert !important;
+}
+h3 {
+    font-size: xx-large !important;
+}
+.alert {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.bg-1 {
+    background-color: saddlebrown ;
+    font-size: xx-large;
+}
+
+.bg-2 {
+    background-color: salmon;
+    width: auto !important;
+    font-size: xx-large;
+};
+
+.bg-3 {
+    background-color:green;
+    width: auto !important;
+    font-size: xx-large;
+};
+
+.bg-4 {
+    background-color:gold;
+    width: auto !important;
+    font-size: xx-large;
+};
+

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Table
+@Table(uniqueConstraints = @UniqueConstraint(name = "uniqueEmail", columnNames = {"email"}))
 @Entity(name = "users")
 public class User {
 

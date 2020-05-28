@@ -1,16 +1,31 @@
 package com.jordansoares.dtos;
 
+import javax.validation.constraints.*;
+
+import org.springframework.validation.annotation.Validated;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UserDto {
 
     private Integer id;
+    @NotNull
+    @Size(min = 3, max = 512)
     private String firstname;
+    @NotNull
+    @Size(min = 3, max = 512)
     private String lastname;
+    @NotNull
+    @Size(min = 3, max = 512)
     private String password;
+    @NotNull
+    @Email
+    @Size(min = 3, max = 254)
     private String email;
+    @Past
     private LocalDate birthdate;
+
     private LocalDateTime lastKnownPresence;
 
     public UserDto() {

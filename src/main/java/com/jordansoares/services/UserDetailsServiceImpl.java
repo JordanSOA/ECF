@@ -23,6 +23,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User byId = userRepository.findByEmail(username);
+        if (byId == null){
+            throw new UsernameNotFoundException("BadRequest" + username);
+        }
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("USER");
         Set<SimpleGrantedAuthority> collect = new HashSet<>();
         collect.add(authority);

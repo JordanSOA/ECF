@@ -13,4 +13,6 @@ public interface UserService {
     UserDto convertEntityToDto(User user);
 
     User convertDtoEntityTo(UserDto userDto);
+
+    UserDto verifyUserLogin(String email, String password);
 }

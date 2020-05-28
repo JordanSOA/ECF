@@ -52,6 +52,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto verifyUserLogin(String email, String password) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        User byId = userRepository.findByEmail(email);
+
+        if(!passwordEncoder.matches(password, userDetails.getPassword())){
+            throw new BadCredentialsException("Bad credentials"+ email);
+        } else {
+            return convertEntityToDto(byId);
+        }
+    }
+
+    @Override
     public UserDto convertEntityToDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setEmail(user.getEmail());
