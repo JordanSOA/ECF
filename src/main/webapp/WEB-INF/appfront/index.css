@@ -1,21 +1,36 @@
+body {
+    background-color: #F2F7F2;
+}
+a {
+    color: #F2F7F2 !important;
+}
 h1 {
-    font-size: revert !important;
+    font-size: 7vw!important;
+    width: auto !important;
 }
 h3 {
     font-size: xx-large !important;
+    text-decoration: underline;
+}
+
+form {
+    background-color: #BBBE64 !important;
+    border: 2px solid black;
 }
 .alert {
     text-align: center;
     font-size: xx-large;
 }
-
+.alert > a {
+    color: black !important;
+}
 .bg-1 {
-    background-color: saddlebrown ;
+    background-color: #BCAA99 ;
     font-size: xx-large;
 }
 
 .bg-2 {
-    background-color: salmon;
+    background-color: #BCAA99;
     width: auto !important;
     font-size: xx-large;
 };

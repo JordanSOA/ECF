@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -59,6 +60,9 @@ public class UserServiceImpl implements UserService {
         if(!passwordEncoder.matches(password, userDetails.getPassword())){
             throw new BadCredentialsException("Bad credentials"+ email);
         } else {
+            LocalDateTime now = LocalDateTime.now();
+            byId.setLastKnownPresence(now);
+            userRepository.save(byId);
             return convertEntityToDto(byId);
         }
     }
